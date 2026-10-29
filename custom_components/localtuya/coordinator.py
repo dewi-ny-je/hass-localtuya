@@ -229,11 +229,7 @@ class TuyaDevice(TuyaListener, ContextualLogger):
                     and not self._status
                     and not self.is_sleep
                 ):
-                    message = f"Connection failed: {e}"
-                    if self._device_config.debug_unreachable_errors:
-                        self.debug(message, force=True)
-                    else:
-                        self.warning(message)
+                    self.warning(f"Connection failed: {e}")
                     break
             except Exception as ex:  # pylint: disable=broad-except
                 await self.abort_connect()
